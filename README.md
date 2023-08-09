@@ -20,11 +20,19 @@ The UDP Multicast Stream Monitor is a web application built with Flask that allo
 - Flask 2.1.1
 - python-dateutil 2.8.2
 
+## requirements.txt
+```
+Flask==2.1.1
+python-dateutil==2.8.2
+```
 ## Installation
 1. Clone this repository to your local machine.
 2. Navigate to the project directory.
 3. Create a virtual environment (recommended) and activate it.
 4. Install the required packages using the command:
+```
+pip install -r requirements.txt
+```
 
 ## Usage
 1. Run the Flask app:
