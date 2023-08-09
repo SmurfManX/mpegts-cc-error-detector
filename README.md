@@ -3,12 +3,17 @@
 ## Overview
 The UDP Multicast Stream Monitor is a web application built with Flask that allows you to monitor UDP multicast streams and visualize packet loss data over time. It provides a dashboard where you can add, configure, and monitor multiple channels.
 
+![Dashboard](images/dashboard.png)
+
 ## Features
 - Add and configure channels with names and addresses
 - Start and stop monitoring for each channel
 - Visualize packet loss data over time on interactive line charts
 - Toggle visibility of individual channel graphs
 - View data for specific time ranges
+
+![Channel Graph](images/graph.png)
+
 
 ## Prerequisites
 - Python 3.x

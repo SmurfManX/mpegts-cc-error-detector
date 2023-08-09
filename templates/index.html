@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>UDP Multicast Stream Monitor</title>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h4>UDP Multicast Stream Monitor</h4>
+
+        <!-- Form for adding a new channel -->
+        <form action="/add" method="post">
+            <div class="row">
+                <div class="input-field col s4">
+                    <input id="name" type="text" name="name" required>
+                    <label for="name">Channel Name</label>
+                </div>
+                <div class="input-field col s4">
+                    <input id="address" type="text" name="address" required>
+                    <label for="address">Address</label>
+                </div>
+                <div class="input-field col s4">
+                    <button type="submit" class="btn waves-effect waves-light">Add Channel</button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Table to display channels -->
+        <table class="striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for channel in channels %}
+                <tr>
+                    <td id="channelName_{{ loop.index0 }}">{{ channel.name }}</td>
+                    <td>{{ channel.address }}</td>
+                    <td>
+        		<button class="btn-small waves-effect waves-light toggle-graph-button">Show/Hide Graph</button>
+	                <form style="display:inline-block;" action="/toggle/{{ loop.index0 }}" method="post">
+                            <button type="submit" class="btn-small waves-effect waves-light">{{ "Stop" if channel.get('running', False) else "Start" }}</button>
+                        </form>
+                        <a href="/delete/{{ loop.index0 }}" class="btn-small red waves-effect waves-light">Delete</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <div id="graphContainer_{{ loop.index0 }}" style="display:none;">
+                            <canvas id="chart_{{ loop.index0 }}"></canvas>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>
